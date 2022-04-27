@@ -4,29 +4,11 @@ const path = require('path');
 const bodyparser = require('body-parser');
 const UserModel = require("./models/user")
 
-// const MongoClient = require('mongodb').MongoClient;
-// const assert = require('assert');
-
-// // Connection URL
-// const url = 'mongodb://localhost:27017';
-
-// // Database Name
-// const dbName = 'formdb';
-
-// // Use connect method to connect to the server
-// MongoClient.connect(url, function(err, client) {
-//   assert.equal(null, err);
-//   console.log("Connected successfully to server");
-
-//   const db = client.db(dbName);
-
-//   client.close();
-
-// });
 
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/formdb');
+mongoose.connect("mongodb://"+process.env.MONGO_SERVER)//.then(console.log).catch(console.error)
 var db=mongoose.connection;
 
 
@@ -38,17 +20,7 @@ db.once('open', function(callback){
 	console.log("connection succeeded");
 })
 
-        
-module.exports={
-     createData:function(inputData, callback){
-                  
-        userData= new UserModel(inputData);
-        userData.save(function(err, data){
-          if (err) throw err;
-           return callback(data);
-        });
-	}
-}
+ 
 	
 
 
