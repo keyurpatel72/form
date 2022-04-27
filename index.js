@@ -7,18 +7,11 @@ const UserModel = require("./models/user")
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/formdb');
-mongoose.connect("mongodb://"+process.env.MONGO_SERVER)//.then(console.log).catch(console.error)
-var db=mongoose.connection;
+mongoose.connect('mongodb://127.0.0.1:27017/formdb');//.then(console.log).catch(console.error)
+//mongoose.connect("mongodb://"+process.env.MONGO_SERVER)
 
 
 
-
-//db.on('error', console.log.bind(console, "connection error"));
-db.on('error',console.error.bind(console,"connection error"));
-db.once('open', function(callback){
-	console.log("connection succeeded");
-})
 
  
 	
@@ -36,37 +29,9 @@ app.get('/', function(request, response) {
 	response.sendFile(path.join(__dirname + '/public/login.html'));
 });
 
-// app.post('/login_pros', function(request, response) {
-	
-// 	let username = request.body.username;
-// 	let password = request.body.password;
-
-// 	if (username && password) {
-	
-//         connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?',
-//          [username, password], function(error, results, fields) {
-		
-// 			if (error) throw error;
-			
-// 			if (results.length > 0) {
-				
-// 				request.session.loggedin = true;
-// 				request.session.username = username;
-			
-// 				response.redirect('/home');
-// 			} else {
-// 				response.send('Incorrect !');
-// 			}			
-// 			response.end();
 
 
 
-// 		});
-// 	} else {
-// 		response.send('Please enter Username & Password!');
-// 		response.end();
-// 	}
-// });
 app.post('/login_pros', function(request, response) {
 	// // Capture the input fields
 	// let username = request.body.username;
@@ -75,20 +40,16 @@ app.post('/login_pros', function(request, response) {
 	let password = request.query.password;
 	
 	if (username && password) {
-	
-	
-			if (error) throw error;
-			
-			if (results.length > 0) {
-			
-				request.session.loggedin = true;
-				request.session.username = username;
-		
-				response.redirect('/home');
-			} else {
-				response.send('Incorrect Username and/or Password!');
-			}			
-			response.end();
+	UserModel.findOne({ username: username, password: password }, function (err, user) {
+	         if(err){
+                               res.send("Database error")
+                        }
+                        if(user){
+                            console.log(user)
+                            res.redirect("/dashboard")
+                         }
+                 })
+	} 
 		
 	} else {
 		response.send('Please enter Username and Password!');
