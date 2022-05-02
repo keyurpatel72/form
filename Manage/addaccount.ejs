@@ -1,0 +1,162 @@
+<%- contentFor('HeaderCss') %>
+
+<%- contentFor('breadcrumb') %>
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Add Account</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Manage</a></li>
+                    <li class="breadcrumb-item active">Add Account</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<%- contentFor('body') %>
+<form method="post" action="/insert_account" name="addaccount" onsubmit=""> 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Account Name</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" name="ac_name"  placeholder="Enter Account Name" >
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Account Owner Name</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" name="ac_owner_name" placeholder="Enter Account Owner Name"  id="example-text-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Building Name/Address1</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="textarea" name="address1" placeholder="Enter Building Name/Address1" id="example-text-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Street Name/Address2</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="textarea" name="address2" placeholder="Enter Building Name/Address2" id="example-text-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Country</label>
+                    <div class="col-md-10">
+                        <select class="form-select" value="" name="Country">
+                           <option value=""disabled selected>select country</option>
+                            <option value="India">India</option>
+                            <option value="australia">Australia</option>
+                            <option value="canada">Canada</option>
+                            <option value="us">United States of America</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">State</label>
+                    <div class="col-md-10">
+                        <select class="form-select"value="" name="State">
+                            <option value=""disabled selected>Select State</option>
+                            <option value="gujrat">Gujrat</option>
+                            <option value="goa">Goa</option>
+                            <option value="delhi">Delhi</option>
+                            <option value="punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Suburb/City</label>
+                    <div class="col-md-10">
+                        <select class="form-select"value="" name="City">
+                            <option value=""disabled selected>Select Suburb/City</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="ahmedabad">Ahmedabad</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Bhopal">Bhopal</option>
+                            <option value="Agra">Agra</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Zipcode</label>
+                    <div class="col-md-10"> 
+                        <input class="form-control" type="text" name="zip" placeholder="Enter Zipcode" id="example-text-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-email-input" class="col-md-2 col-form-label">Email</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="email" name="email" placeholder="Enter Email"
+                            id="example-email-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-password-input" class="col-md-2 col-form-label">Phone</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="number" name="number" placeholder="Enter Phone..."
+                            id="example-password-input">
+                    </div>  
+                 </div>
+                <div class="mb-3 row">
+                    <label for="example-number-input" class="col-md-2 col-form-label"> TimeZone</label>
+                    <div class="col-md-10">
+                        <input class="form-control" placeholder="Select TimeZone" type="time" 
+                            id="example-number-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-number-input" class="col-md-2 col-form-label">Billing Department Contact Name</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" name="bdcname"  placeholder="Enter Billing Department Contact Name"
+                            id="example-number-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-number-input" class="col-md-2 col-form-label">Billing Department Contact Number</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="number" name="bdcnumber"  placeholder="Enter Billing Department Contact Number"
+                            id="example-number-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-number-input" class="col-md-2 col-form-label">Billing Department Contact Email</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="email" name="bdcemail"  placeholder="Enter Billing Department Contact email"
+                            id="example-number-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-text-input" class="col-md-2 col-form-label">Status</label>
+                    <div class="col-md-10">
+                        <select class="form-select">
+                            <option value=""disabled selected>Select Status</option>
+                            <option>Active</option>
+                            <option>Disactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+                
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+</form>
+
+<%- contentFor('FooterJs') %>
+
+<%- contentFor('BottomJs') %>
