@@ -1,0 +1,84 @@
+<%- contentFor('HeaderCss') %>
+
+<%- contentFor('breadcrumb') %>
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Add User</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Manage</a></li>
+                    <li class="breadcrumb-item active">Add User</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<%- contentFor('body') %>
+<form  method="post" action="/insert_user" name="insert_form" > 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+                    <div class="mb-3 row">
+                       <label for="example-text-input" class="col-md-2 col-form-label">Name</label>
+                       <div class="col-md-10">
+                           <input class="form-control" type="name" name="name" placeholder="Enter Name.."  id="example-text-input">
+                       </div>
+                   </div>
+                   <div class="mb-3 row">
+                    <label for="example-email-input" class="col-md-2 col-form-label">Email</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="email" name="email" placeholder="Enter Email.."
+                            id="example-email-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-password-input" class="col-md-2 col-form-label">Password</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="password" name="password" placeholder="Enter Password"
+                           >
+                    </div>  
+                 </div>
+                <div class="mb-3 row">
+                    <label for="example-number-input" class="col-md-2 col-form-label">Role</label>
+                    <div class="col-md-10">
+                        <select class="form-select" type="text" value="" name="role">
+                            <option value=""disabled selected>Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="users">Users</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-number-input" class="col-md-2 col-form-label">Account</label>
+                    <div class="col-md-10">
+                        <select class="form-select" type="text" value="" name="Account"> 
+                            <option value=""disabled selected>Select Account</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+</form>
+
+
+
+<%- contentFor('FooterJs') %>
+
+<%- contentFor('BottomJs') %>
