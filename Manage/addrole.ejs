@@ -1,0 +1,95 @@
+<%- contentFor('HeaderCss') %>
+
+<%- contentFor('breadcrumb') %>
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Add Role</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Manage</a></li>
+                    <li class="breadcrumb-item active">Add Role</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<%- contentFor('body') %>
+<form  method="post" action="/insert_role" name="insert_form" > 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+                    <div class="mb-3 row">
+                       <label for="example-text-input" class="col-md-2 col-form-label">Name</label>
+                       <div class="col-md-10">
+                           <input class="form-control" type="role_name" name="role_name" placeholder="Enter Name.."  id="example-text-input">
+                       </div>
+                   </div>
+                   <div class="mb-3 row">
+                    <label for="example-email-input" class="col-md-2 col-form-label">Description</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="role_description" name="role_description" placeholder="Enter Description.."
+                            id="example-email-input">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="example-password-input" class="col-md-2 col-form-label">Permissions</label>
+                    <table  style="border: 1px solid blue; width:80%;text-align:center; margin-left: 18%; 
+                    margin-right: auto;" >
+                        <tr style="height: 50px;">
+                          <th width="20" style="border: 1px solid blue;">#</th>
+                          <th width="92" style="border: 1px solid blue;">Module Name</th>
+                          <th width="95" style="border: 1px solid blue;">Allow Add</th>
+                          <th width="95" style="border: 1px solid blue;">Allow View</th>
+                          <th width="95" style="border: 1px solid blue;">Allow Edit</th>
+                          <th width="95" style="border: 1px solid blue;">Allow Delete</th>
+                        </tr>
+                        <tr style="height: 50px;">
+                          <td width="20" style="border: 1px solid blue ;">1</td>
+                          <td width="95" style="border: 1px solid blue ;" class="dashboard" id="dashboard" value=""  name="dashboard">Dashboard</td>
+                          <td width="95" style="border: 1px solid blue ;"></td>
+                          <td width="95" style="border: 1px solid blue ;"><input value="allow-view" for="dashboard" type="checkbox"/>&nbsp;</td>
+                          <td width="95" style="border: 1px solid blue ;"></td>
+                          <td width="95" style="border: 1px solid blue ;"></td>
+                        </tr>
+                        <tr style="height: 50px;">
+                          <td width="20" style="border: 1px solid blue ;">2</td>
+                          <td width="95" style="border: 1px solid blue ;" class="role" value="" name="role">Role</td>
+                          <td width="95" style="border: 1px solid blue ;"><input value="allow-add"  type="checkbox"/>&nbsp;</td>
+                          <td width="95" style="border: 1px solid blue ;"><input value="allow-view"    type="checkbox"/>&nbsp;</td>
+                          <td width="95" style="border: 1px solid blue ;"><input value="allow-edit"   type="checkbox"/>&nbsp;</td>
+                          <td width="95" style="border: 1px solid blue ;"><input value="allow-delete"  type="checkbox"/>&nbsp;</td>
+                        </tr>
+                        <tr style="height: 50px;">
+                            <td width="20" style="border: 1px solid blue ;">3</td>
+                            <td width="95" style="border: 1px solid blue ;"class="users" value="" name="users">Users</td>
+                            <td width="95" style="border: 1px solid blue ;"><input value="allow-add"  type="checkbox"/>&nbsp;</td>
+                            <td width="95" style="border: 1px solid blue ;"><input value="allow-view"    type="checkbox"/>&nbsp;</td>
+                            <td width="95" style="border: 1px solid blue ;"><input value="allow-edit"   type="checkbox"/>&nbsp;</td>
+                            <td width="95" style="border: 1px solid blue ;"><input value="allow-delete"  type="checkbox"/>&nbsp;</td>
+                          </tr>
+                      </table>
+                 </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+</form>
+
+
+
+<%- contentFor('FooterJs') %>
+
+<%- contentFor('BottomJs') %>
