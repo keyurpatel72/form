@@ -1,103 +1,96 @@
+var express = require('express');
+var app = express();
+var ejs = require('ejs');
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true })); 
+var path = require('path');
+var mongoose = require ('mongoose');
+var http = require('http').Server(app);
 
-const express = require('express');
-const path = require('path');
-const bodyparser = require('body-parser');
-const UserModel = require("./models/user");
-const MongoClient = require('mongodb').MongoClient;
-const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/formdb');
+// mongoose.connect(`mongodb://localhost:27017/skotedb`, {
+//     useNewUrlParser: true,
+   
+  
+// }).then(() => {
+//     console.log('MongoDB connected!!');
+// }).catch(err => {
+//     console.log('Failed to connect to MongoDB', err);
+// });
 
-var db=mongoose.connection;
+//campass path
+//var mongoDB = 'mongodb:/localhost:27017/skote';
+//mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
-db.on('error', console.log.bind(console, "connection error"));
-db.once('open', function(callback){
-	console.log("connection succeeded");
-})
-const app = express();
-const port = 2300
-app.use(bodyparser.urlencoded({extended:false}))
-app.use(bodyparser.json())
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '/public')));
+//mongoose connection
+//var db= mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function callback () {
+//   console.log(" connection successfully");
 
-// register form
-app.get('/register', function(request, response) {
-	response.sendFile(path.join(__dirname + '/public/register.html'));
+//.then(()=>console.log(" connection successfully"))
+//.catch((err)=>console.log(err));
+
+exports.test = function(req,res) {
+  res.render('skote');
+};
+
+
+// import controller
+var AuthController = require('./controllers/AuthController');
+
+// import Router file
+var pageRouter = require('./routers/route');
+
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
+var i18n = require("i18n-express");
+app.use(bodyParser.json());
+var urlencodeParser = bodyParser.urlencoded({ extended: true });
+
+app.use(session({
+  key: 'user_sid',
+  secret: 'somerandonstuffs',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    expires: 1200000
+  }
+}));
+
+app.use(session({ resave: false, saveUninitialized: true, secret: 'nodedemo' }));
+app.use(flash());
+app.use(i18n({
+  translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path.
+  siteLangs: ["es", "en", "de", "ru", "it"],
+  textsVarName: 'translation'
+}));
+
+app.use('/public', express.static('public'));
+
+app.get('/layouts/', function (req, res) {
+  res.render('view');
 });
 
-app.post('/post-register',function(request,response){
-	//send data
-		var email =request.body.email;
-		var username = request.body.username;
-		var password = request.body.password;
+// apply controller
+AuthController(app);
 
-		var data = {
-			"email":email,
-			"username":username,
-			"password":password
-		}
-	db.collection('users').insertOne(data,function(err, collection){
-			if (err) throw err;
-			console.log("Record inserted Successfully"); 
-			if(collection){
-				return response.redirect('/'); // redirect login page
-			 }
-		});
+//For set layouts of html view
+var expressLayouts = require('express-ejs-layouts');
+const { error } = require('console');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
+// Define All Route 
+pageRouter(app);
+
+app.all('*', function (req, res) {
+  res.locals = { title: 'Error 404' };
+  res.render('pages/pages-404', { layout: false });
 });
 
- //login form
-app.get('/', function(request, response) {
-	response.sendFile(path.join(__dirname + '/public/login.html'));
+http.listen(8000, function () {
+  console.log('listening on *:8000');
 });
-app.post('/login_pros', function(request, response) {
-	// // Capture  fields
-	 var username = request.body.username;
-	 var password = request.body.password;
-
-	if (username && password) {
-		
-	UserModel.findOne({ username: username, password: password }, function (err, user) {
-	         if(err){
-				console.log('database error');
-                        }
-                        if(user){
-							return response.redirect('Dashboard');
-                         }
-                 })
-			
-	}else {
-		response.send('Please enter Username and Password!');
-		response.end();
-	}
-});
-
-
-
-app.get('/forgot-password', function(request, response) {
-	response.sendFile(path.join(__dirname + '/public/forgot-password.html'));
-});
-
-
-app.get('/home', function(request, response) {
-	//  user  login
-	if (request.session.loggedin) {
-		// Output username
-		response.send('Welcome back, ' + request.session.username + '!');
-	} else {
-		// Not logged in
-		response.send('Please login to view this page!');
-	}
-	response.end();
-});
-
-app.get('/dashboard', function(request, response) {
-	response.sendFile(path.join(__dirname + '/public/dashbord.html'));
-});
-
-app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`)
-  });
-
-
